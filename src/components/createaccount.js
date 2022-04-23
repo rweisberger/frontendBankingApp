@@ -8,6 +8,7 @@ function CreateAccount(){
     const [name, setName]         = useState('');
     const [email, setEmail]       = useState('');
     const [password, setPassword] = useState('');
+    const [buttonState, setButtonState] = useState(true)
     const ctx = useContext(UserContext);
 
 
@@ -25,7 +26,11 @@ function CreateAccount(){
         if(!validate(name,'name')) return;
         if(!validate(email, 'email')) return;
         if(!validate(password, 'password')) return;
-        ctx.users.push({name, email, password, balance:100});
+        // ctx.users.push({name, email, password, balance:100});
+        ctx.setUsers((existingState) => [
+            ...existingState,
+            { name, email, password, balance: 100 },
+          ]);
         alert('Successfully created account!');
         setShow(false);
     }

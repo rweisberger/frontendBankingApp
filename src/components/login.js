@@ -5,9 +5,6 @@ import { UserContext, Card } from "./context";
 function Login(){
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('')
-    const [loggedOut, setLoggedOut] = useState('');
-
-    // const [user, setUser] = React.useState('');
     const ctx = useContext(UserContext);
 
 
@@ -19,19 +16,17 @@ function Login(){
         let data = ctx.users;
            data.forEach(user => {
             if(loginEmail === user.email && loginPassword === user.password) {
-                    console.log('user match');
-                    ctx.activeUser = user;
-                    console.log(ctx);
-                    setLoggedOut(false);       
-                }
+                console.log('user match');
+                ctx.setActiveUser(user);
+                console.log(ctx);
+            }
         }); 
     }
 
     const logoutUser = () => {
-        delete ctx.activeUser;
+        ctx.setActiveUser(null);
         setLoginEmail('');
         setLoginPassword('');
-        setLoggedOut(true);
         console.log(ctx);
     };
 

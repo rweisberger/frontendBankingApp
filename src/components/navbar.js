@@ -1,21 +1,8 @@
 import React,  { useState, useEffect, useContext } from "react";
 import { UserContext } from "./context";
 
-
 function NavBar(){
-    const [loggedIn, setLoggedIn] = useState('');
     const ctx = useContext(UserContext);
-    
-    useEffect(()=> {
-        console.log('useEffect running');
-        console.log(ctx);
-        if(ctx && ctx.activeUser){
-            setLoggedIn(true)
-        }else{
-            setLoggedIn(false)
-        }
-    }, [ctx])
-    
     
     return(
         <div>
@@ -26,24 +13,23 @@ function NavBar(){
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                {/* ctx.activeUser needs time to load? it is not available immediately and throws an error on its own. if ctx and ctx.activeUser are added, there is no error and the navbar loads*/}
-                {/* {loggedIn ? ( */}
-                    <div className="navbar-nav">
+                {ctx.activeUser ? (
+                    <div className="navbar-nav ml-auto">
                     {/* <a className="nav-item nav-link px-3" href="#/CreateAccount">Create Account</a> */}
                     <a className="nav-item nav-link px-3" href="#/login">Login</a>
                     <a className="nav-item nav-link px-3" href="#/deposit">Deposit</a>
                     <a className="nav-item nav-link px-3" href="#/withdraw">Withdraw</a>
-                    <a className="nav-item nav-link px-3" href="#/balance">Balance</a>
                     <a className="nav-item nav-link px-3" href="#/allData">AllData</a>
-                    <a className="nav-item nav-link px-3" href="#/CreateAccount">Create Account</a>
-                    <button type="submit" className="btn btn-light">Logout</button>
+                    {/* <a className="nav-item nav-link px-3" href="#/CreateAccount">Create Account</a> */}
+                    <button type="submit" className="btn btn-light" onClick={() => ctx.setActiveUser(null)}>Logout</button>
                     </div>
-                {/* ):(
-                    <div className="navbar-nav">
+                ):(
+                    <div className="navbar-nav ml-auto">
                     <a className="nav-item nav-link px-3" href="#/CreateAccount">Create Account</a>
                     <a className="nav-item nav-link px-3" href="#/login">Login</a>
                     </div>
                 )
-            } */}
+            }
             </div>
         </nav>
         </div>
