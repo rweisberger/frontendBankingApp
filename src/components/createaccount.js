@@ -8,13 +8,12 @@ function CreateAccount(){
     const [name, setName]         = useState('');
     const [email, setEmail]       = useState('');
     const [password, setPassword] = useState('');
-    const [buttonState, setButtonState] = useState(true)
     const ctx = useContext(UserContext);
 
 
     function validate(field, label){
         if(!field){
-            setStatus('Error:' + label);
+            setStatus('Error: ' + label + ' required');
             setTimeout(()=> setStatus(''),3000); // what is this for?
             return false;
         }
@@ -26,7 +25,6 @@ function CreateAccount(){
         if(!validate(name,'name')) return;
         if(!validate(email, 'email')) return;
         if(!validate(password, 'password')) return;
-        // ctx.users.push({name, email, password, balance:100});
         ctx.setUsers((existingState) => [
             ...existingState,
             { name, email, password, balance: 100 },
@@ -53,10 +51,10 @@ function CreateAccount(){
                     Name<br/>
                     <input type="input" className="form-control" id="name" placeholder="Enter Name" value={name} onChange={e => setName(e.currentTarget.value)} /><br/>
                     Email address<br/> 
-                    <input type="input" className="form-control" id="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.currentTarget.value)} /><br/>
+                    <input type="email" className="form-control" id="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.currentTarget.value)} /><br/>
                     Password<br/> 
                     <input type="password" className="form-control" id="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.currentTarget.value)} /><br/>
-                    <button type="submit" className="btn btn-light" onClick={handleCreate}>Create Account</button>
+                    <button type="submit" className="btn btn-light" onClick={handleCreate} disabled={name || email || password ? false : true}>Create Account</button>
                     </>
                 ):(
                     <>

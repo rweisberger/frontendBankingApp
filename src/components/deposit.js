@@ -10,8 +10,13 @@ function Deposit(){
 
 function makeDeposit(){
     // console.log(typeof activeUser.balance);
-    console.log('deposit amount:',typeof depositAmount);
-    activeUser.balance += depositAmount;    
+    // console.log('deposit amount:',typeof depositAmount);
+    if(depositAmount > 0) {
+        activeUser.balance += depositAmount;
+        alert('The deposit was successfully received.');  
+    } else {
+        alert('Deposit values cannot be negative.');
+    };  
     setDepositAmount(0);
     document.getElementById('deposit').value='';
     // the last two lines make the balance update, by changing state, and reset the input field
@@ -24,10 +29,10 @@ function makeDeposit(){
                 header="Deposit"
                 body={
                     <>
-                    Balance {activeUser ? activeUser.balance : '--'}<br/><br/>  
+                    Account Balance : $  {activeUser ? activeUser.balance : '--'}<br/><br/>  
                     Deposit Amount<br/> 
                     <input type="number" className="form-control" id="deposit" placeholder="Enter amount" onChange={e => setDepositAmount(Number(e.currentTarget.value))} /><br/>
-                    <button type="submit" className="btn btn-light" onClick={makeDeposit}>Deposit</button>
+                    <button type="submit" className="btn btn-light" onClick={makeDeposit} disabled={depositAmount ? false : true}>Deposit</button>
                     </>
                 } 
             />
