@@ -14,20 +14,19 @@ function Login(){
 
     function findUser(){
         let data = ctx.users;
-           data.forEach(user => {
-            if(loginEmail === user.email && loginPassword === user.password) {
-                console.log('user match');
-                ctx.setActiveUser(user);
-                console.log(ctx);
-            }
-        }); 
+        let matchingUser = data.find(user => loginEmail === user.email && loginPassword === user.password);
+        ctx.setActiveUser(matchingUser);
+        // console.log(matchingUser);   
+        if(matchingUser == undefined){
+            alert('User not found.')
+        };   
     }
 
     const logoutUser = () => {
         ctx.setActiveUser(null);
         setLoginEmail('');
         setLoginPassword('');
-        console.log(ctx);
+        // console.log(ctx);
     };
 
     // for logoutUser I tried to clear the form with document.getElementById('email').value='' in find user and in the logout user, but it did not work, probably because the fields were not present when the lines of code were read and errors were thrown. Since I used the ternary operator to display two forms of the card, i followed Abel's example and reset the state to ''

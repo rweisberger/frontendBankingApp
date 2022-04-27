@@ -8,12 +8,13 @@ function Withdraw(){
 
     // onclick update balance in user context
     function makeWithdraw(){
-        console.log(typeof withdrawAmount);
-        if(withdrawAmount <= activeUser.balance) {
+        if(0 < withdrawAmount && withdrawAmount <= activeUser.balance) {
             activeUser.balance -= withdrawAmount;
             alert('The withdraw was processed.');
             setWithdrawAmount(0);
             document.getElementById('withdraw').value='';
+        } else if(0 > withdrawAmount) {
+            alert('Enter a positive number.')
         } else {
             alert('Insufficient funds.')
         }
@@ -26,7 +27,7 @@ function Withdraw(){
             header="Withdraw"
             body={
                 <>
-                Account Balance : ${activeUser ? activeUser.balance : '--'}<br/><br/>  
+                Account Balance : $ {activeUser ? activeUser.balance : '--'}<br/><br/>  
                 Withdraw Amount<br/> 
                 <input type="number" className="form-control" id="withdraw" placeholder="Enter amount" onChange={e => setWithdrawAmount(Number(e.currentTarget.value))}/><br/>
                 <button type="submit" className="btn btn-light" onClick={makeWithdraw} disabled={withdrawAmount ? false : true}>Withdraw</button>

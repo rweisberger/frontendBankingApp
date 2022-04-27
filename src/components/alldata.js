@@ -5,9 +5,9 @@ function AllData(){
     const ctx=useContext(UserContext);
 
     let users = ctx.users
-    users.forEach(user => {
-        console.log(user.name, user.email, user.password)
-    });
+    // users.forEach(user => {
+    //     console.log(user.name, user.email, user.password)
+    // });
 
 
     return(

@@ -14,14 +14,29 @@ function CreateAccount(){
     function validate(field, label){
         if(!field){
             setStatus('Error: ' + label + ' required');
-            setTimeout(()=> setStatus(''),3000); // what is this for?
+            setTimeout(()=> setStatus(''),3000);
             return false;
         }
+        if(field === password && field.length < 8){
+            alert('Password must be 8 or more characters long');
+            return false;
+        }
+        if(field === email){
+            //The pattern below was take from https://www.w3schools.blog/email-validation-javascript-js
+            var emailFormat = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            if(field.match(emailFormat)){
+                return true
+            }else{
+                alert('Enter a valid email address');
+                return false;
+            }
+        }
+
         return true;
     }
 
     function handleCreate(){
-        console.log(name, email, password);
+        // console.log(name, email, password);
         if(!validate(name,'name')) return;
         if(!validate(email, 'email')) return;
         if(!validate(password, 'password')) return;
@@ -59,7 +74,7 @@ function CreateAccount(){
                 ):(
                     <>
                     <h5>Success</h5>
-                    <button type="submit" className="btn btn-light" onClick={clearForm}>Add another account</button>
+                    <button type="submit" className="btn btn-light" onClick={clearForm}>Add another account</button> 
                     </>
                 )}
             />

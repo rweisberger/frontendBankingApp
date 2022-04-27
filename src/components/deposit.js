@@ -5,8 +5,7 @@ function Deposit(){
     const [depositAmount, setDepositAmount] = useState(0)
     const ctx = useContext(UserContext);
     let activeUser = ctx.activeUser;
-
-    console.log('deposit amount:',typeof depositAmount);
+    // console.log('deposit amount:',typeof depositAmount);
 
 function makeDeposit(){
     // console.log(typeof activeUser.balance);

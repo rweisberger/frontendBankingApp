@@ -1,8 +1,20 @@
 import React, { useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import { UserContext } from "./context";
+
+//useNavigate is routing the user back to the login page once they have logged out of their account through the Navbar button. 
+//useNavigate replaced useHistory- there are still many resources about useHistory even though it is out-of-date 
 
 function NavBar(){
     const ctx = useContext(UserContext);
+    const navigate = useNavigate();
+
+
+    function handleClick() {
+    //   console.log(navigate);
+      navigate('/login');
+      ctx.setActiveUser(null);
+    }
     
     return(
         <div>
@@ -12,16 +24,12 @@ function NavBar(){
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-               {/* ctx.activeUser needs time to load? it is not available immediately and throws an error on its own. if ctx and ctx.activeUser are added, there is no error and the navbar loads*/}
                 {ctx.activeUser ? (
                     <div className="navbar-nav ml-auto">
-                    {/* <a className="nav-item nav-link px-3" href="#/CreateAccount">Create Account</a> */}
-                    <a className="nav-item nav-link px-3" href="#/login" data-toggle="tooltip" data-placement="bottom" title="Access your account">Login</a>
                     <a className="nav-item nav-link px-3" href="#/deposit" data-toggle="tooltip" data-placement="bottom" title="Make a deposit">Deposit</a>
                     <a className="nav-item nav-link px-3" href="#/withdraw" data-toggle="tooltip" data-placement="bottom" title="Make a withdraw">Withdraw</a>
                     <a className="nav-item nav-link px-3" href="#/allData" data-toggle="tooltip" data-placement="bottom" title="View data for all users">AllData</a>
-                    {/* <a className="nav-item nav-link px-3" href="#/CreateAccount">Create Account</a> */}
-                    <button type="submit" className="btn btn-outline-info btn-sm" onClick={() => ctx.setActiveUser(null)}>Logout</button>
+                    <button type="submit" className="btn btn-outline-info btn-sm" onClick={handleClick}>Logout</button>
                     </div>
                 ):(
                     <div className="navbar-nav ml-auto">
