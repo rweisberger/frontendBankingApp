@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "./context";
+import Card from "./card";
 import bank from "./bank.png"
 
 function Home(){

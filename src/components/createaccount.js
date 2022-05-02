@@ -1,24 +1,30 @@
-import React,  { useState, useContext } from "react";
-import { UserContext, Card } from "./context";
+import { useState, useContext } from "react";
+import UserContext from "./context";
+import AlertComponent from "./alert";
+import Card from "./card";
 
 
 function CreateAccount(){
     const [show, setShow]         = useState(true);
-    const [status, setStatus]     = useState('');
+    // const [status, setStatus]     = useState('');
     const [name, setName]         = useState('');
     const [email, setEmail]       = useState('');
     const [password, setPassword] = useState('');
+    const [open, setOpen]         = useState(false);
+    const [message, setMessage]   = useState('')    
     const ctx = useContext(UserContext);
-
 
     function validate(field, label){
         if(!field){
-            setStatus('Error: ' + label + ' required');
-            setTimeout(()=> setStatus(''),3000);
+            // setStatus('Error: ' + label + ' required');
+            // setTimeout(()=> setStatus(''),3000);
+            setMessage('Error: ' + label + ' required');
+            setOpen(true);
             return false;
         }
         if(field === password && field.length < 8){
-            alert('Password must be 8 or more characters long');
+            setMessage('Error: Password must be 8 or more characters long');
+            setOpen(true);
             return false;
         }
         if(field === email){
@@ -27,11 +33,13 @@ function CreateAccount(){
             if(field.match(emailFormat)){
                 return true
             }else{
-                alert('Enter a valid email address');
+                setMessage('Error: Enter a valid email address');
+                setOpen(true);
                 return false;
             }
         }
-
+        setMessage('Account created successfully!');
+        setOpen(true);
         return true;
     }
 
@@ -42,13 +50,13 @@ function CreateAccount(){
         if(!validate(password, 'password')) return;
         ctx.setUsers((existingState) => [
             ...existingState,
-            { name, email, password, balance: 100 },
+            { name, email, password, balance: 100, transactionHistory: [] },
           ]);
-        alert('Successfully created account!');
         setShow(false);
     }
 
     function clearForm(){
+        setOpen(false);
         setName('');
         setEmail('');
         setPassword('');
@@ -57,10 +65,10 @@ function CreateAccount(){
 
     return(
         <div className="container">
-            <Card 
+            <Card
                 bgcolor="info"
                 header="Create Account"
-                status={status}
+                // status={status}
                 body={show ? (
                     <>
                     Name<br/>
@@ -70,9 +78,11 @@ function CreateAccount(){
                     Password<br/> 
                     <input type="password" className="form-control" id="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.currentTarget.value)} /><br/>
                     <button type="submit" className="btn btn-light" onClick={handleCreate} disabled={name || email || password ? false : true}>Create Account</button>
+                    <AlertComponent open={open} message={message} type="warning" onClose={()=> setOpen(false)} />
                     </>
                 ):(
                     <>
+                     <AlertComponent open={open} message={message} type="success" onClose={()=> setOpen(false)} />
                     <h5>Success</h5>
                     <button type="submit" className="btn btn-light" onClick={clearForm}>Add another account</button> 
                     </>
