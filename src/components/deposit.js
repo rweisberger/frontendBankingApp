@@ -15,7 +15,7 @@ function makeDeposit(){
     if(depositAmount > 0) {
         activeUser.balance += depositAmount;
         setDepositApproval(true);
-        activeUser.transactionHistory.unshift([Date(), `+ $${depositAmount}`, activeUser.balance]);
+        activeUser.transactionHistory.unshift({date: Date(), change: `+ $${depositAmount}`, balance: activeUser.balance});
         console.log(activeUser.transactionHistory);
     } else {
         setDepositApproval(false)

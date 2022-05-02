@@ -20,10 +20,10 @@ function Transactions() {
             </thead>
             <tbody>           
             {userActivityLog.map((entry, index) => (
-                <tr className={entry[1].includes('+') ? "table-success" : "table-danger"} key={index}>
-                <td>{entry[0]}</td>
-                <td>{entry[1]}</td>
-                <td>{entry[2]}</td>
+                <tr className={entry.change.includes('+') ? "table-success" : "table-danger"} key={index}>
+                <td>{entry.date}</td>
+                <td>{entry.change}</td>
+                <td>{entry.balance}</td>
             </tr>
             ))}
             </tbody>

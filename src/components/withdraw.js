@@ -17,7 +17,7 @@ function Withdraw(){
     function makeWithdraw(){
         if(0 < withdrawAmount && withdrawAmount <= activeUser.balance) {
             activeUser.balance -= withdrawAmount;
-            activeUser.transactionHistory.unshift([Date(), `- $${withdrawAmount}`, activeUser.balance]);
+            activeUser.transactionHistory.unshift({date: Date(), change: `- $${withdrawAmount}`, balance: activeUser.balance});
             console.log(activeUser.transactionHistory);
             setWithdrawApproval(true);
             setWithdrawAmount(0);
