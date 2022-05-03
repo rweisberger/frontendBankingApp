@@ -5,14 +5,13 @@ import Card from "./card";
 
 
 function CreateAccount(){
-    const [show, setShow]         = useState(true);
-    // const [status, setStatus]     = useState('');
-    const [name, setName]         = useState('');
-    const [email, setEmail]       = useState('');
-    const [password, setPassword] = useState('');
-    const [open, setOpen]         = useState(false);
-    const [message, setMessage]   = useState('')    
-    const ctx = useContext(UserContext);
+    const [showCreateAccount, setShowCreateAccount] = useState(true);
+    const [name, setName]                           = useState('');
+    const [email, setEmail]                         = useState('');
+    const [password, setPassword]                   = useState('');
+    const [open, setOpen]                           = useState(false);
+    const [message, setMessage]                     = useState('')    
+    const ctx                                       = useContext(UserContext);
 
     function validate(field, label){
         if(!field){
@@ -52,7 +51,7 @@ function CreateAccount(){
             ...existingState,
             { name, email, password, balance: 100, transactionHistory: [] },
           ]);
-        setShow(false);
+        setShowCreateAccount(false);
     }
 
     function clearForm(){
@@ -60,7 +59,7 @@ function CreateAccount(){
         setName('');
         setEmail('');
         setPassword('');
-        setShow(true);
+        setShowCreateAccount(true);
     }
 
     return(
@@ -69,7 +68,7 @@ function CreateAccount(){
                 bgcolor="info"
                 header="Create Account"
                 // status={status}
-                body={show ? (
+                body={showCreateAccount ? (
                     <>
                     Name<br/>
                     <input type="input" className="form-control" id="name" placeholder="Enter Name" value={name} onChange={e => setName(e.currentTarget.value)} /><br/>
@@ -78,7 +77,7 @@ function CreateAccount(){
                     Password<br/> 
                     <input type="password" className="form-control" id="password" placeholder="Enter password" value={password} onChange={e => setPassword(e.currentTarget.value)} /><br/>
                     <button type="submit" className="btn btn-light" onClick={handleCreate} disabled={name || email || password ? false : true}>Create Account</button>
-                    <AlertComponent open={open} message={message} type="warning" onClose={()=> setOpen(false)} />
+                    <AlertComponent open={open} message={message} type="error" onClose={()=> setOpen(false)} />
                     </>
                 ):(
                     <>

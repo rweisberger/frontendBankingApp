@@ -18,7 +18,6 @@ function Withdraw(){
         if(0 < withdrawAmount && withdrawAmount <= activeUser.balance) {
             activeUser.balance -= withdrawAmount;
             activeUser.transactionHistory.unshift({date: Date(), change: `- $${withdrawAmount}`, balance: activeUser.balance});
-            console.log(activeUser.transactionHistory);
             setWithdrawApproval(true);
             setWithdrawAmount(0);
             document.getElementById('withdraw').value='';
@@ -45,10 +44,10 @@ function Withdraw(){
                 <input type="number" className="form-control" id="withdraw" placeholder="Enter amount" onChange={e => setWithdrawAmount(Number(e.currentTarget.value))}/><br/>
                 <button type="submit" className="btn btn-light" onClick={makeWithdraw} disabled={withdrawAmount ? false : true}>Withdraw</button>
                 {withdrawApproval ? 
-                        <AlertComponent open={open} message="The withdraw was processed." type="success" onClose={()=> setOpen(false)} />
-                        :
-                        <AlertComponent open={open} message={errorMessage} type="error" onClose={()=> setOpen(false)} />
-                    }
+                    <AlertComponent open={open} message="The withdraw was processed." type="success" onClose={()=> setOpen(false)} />
+                    :
+                    <AlertComponent open={open} message={errorMessage} type="error" onClose={()=> setOpen(false)} />
+                }
                 </>
             } 
             />
