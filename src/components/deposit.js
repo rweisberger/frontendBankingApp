@@ -1,14 +1,22 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import UserContext from "./context";
 import AlertComponent from "./alert";
 import Card from "./card";
 
 function Deposit(){
+    const navigate = useNavigate();
     const [depositAmount, setDepositAmount] = useState(0)
     const [open, setOpen] = useState(false);
     const [depositApproval, setDepositApproval] = useState('');
     const ctx = useContext(UserContext);
     let activeUser = ctx.activeUser;
+    
+    useEffect(() => {
+        if(activeUser === null){
+          navigate('/login')
+        }
+      }, );
     
 
 function makeDeposit(){

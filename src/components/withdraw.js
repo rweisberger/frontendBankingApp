@@ -1,9 +1,11 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import UserContext from "./context";
 import AlertComponent from "./alert";
 import Card from "./card";
 
 function Withdraw(){
+    const navigate = useNavigate();
     const [withdrawAmount, setWithdrawAmount] = useState(0);
     const ctx = useContext(UserContext);
     const [open, setOpen] = useState(false);
@@ -12,6 +14,12 @@ function Withdraw(){
 
     let activeUser = ctx.activeUser;
     let failureMessage;
+
+    useEffect(() => {
+        if(activeUser === null){
+          navigate('/login')
+        }
+      }, );
 
     // onclick update balance in user context
     function makeWithdraw(){

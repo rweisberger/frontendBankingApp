@@ -1,9 +1,18 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import UserContext from "./context";
 
 function AllData(){
-    const ctx=useContext(UserContext);
+    const navigate = useNavigate();
+    const ctx = useContext(UserContext);
     let users = ctx.users;
+    let activeUser = ctx.activeUser;
+
+    useEffect(() => {
+        if(activeUser === null){
+          navigate('/login')
+        }
+      }, ); 
 
     return(
         <div className="container">
