@@ -17,7 +17,7 @@ function Login(){
         let data = ctx.users;
         let matchingUser = data.find(user => loginEmail === user.email && loginPassword === user.password);
         ctx.setActiveUser(matchingUser);
-        if(matchingUser == undefined){
+        if(matchingUser === undefined){
             setOpen(true);
         };   
     }
