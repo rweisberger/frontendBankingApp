@@ -47,10 +47,16 @@ function CreateAccount(){
         if(!validate(name,'name')) return;
         if(!validate(email, 'email')) return;
         if(!validate(password, 'password')) return;
-        ctx.setUsers((existingState) => [
-            ...existingState,
-            { name, email, password, balance: 100, transactionHistory: [] },
-          ]);
+        // ctx.setUsers((existingState) => [
+        //     ...existingState,
+        //     { name, email, password, balance: 100, transactionHistory: [] },
+        //   ]);
+        const url = `http://localhost:5000/account/create/${name}/${email}/${password}`;
+        (async () => {
+            var res  = await fetch(url);
+            var data = await res.json();    
+            console.log(data);        
+        })();
         setShowCreateAccount(false);
     }
 
