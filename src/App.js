@@ -25,9 +25,10 @@ import './App.css';
 //   return <UserContext.Provider value={context}>{children}</UserContext.Provider>
 // }
 function App() {
-  let [users, setUsers] = useState([{name:'Rachel', email:'rachel@gmail.com', password:'secret', balance:100, transactionHistory: []}]);
+  // let [users, setUsers] = useState([{name:'Rachel', email:'rachel@gmail.com', password:'secret', balance:100, transactionHistory: []}]);
   let [activeUser, setActiveUser] = useState(null);
-  let context = {users, setUsers, activeUser, setActiveUser};
+  let [accessEmail, setAccessEmail] = useState(null);
+  let context = {activeUser, setActiveUser, accessEmail, setAccessEmail};
 
   return (
     <HashRouter>

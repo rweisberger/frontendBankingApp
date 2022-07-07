@@ -6,9 +6,9 @@ import AlertComponent from "./alert";
 function Login(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [activeUser, setActiveUser] = useState('');
+    // const [activeUser, setActiveUser] = useState('');
     const [open, setOpen] = useState(false);
-    // const ctx = useContext(UserContext);
+    const ctx = useContext(UserContext);
 
     // button needs onClick to find user
     // use state to keep track of login status 
@@ -28,19 +28,20 @@ function Login(){
             try {
                 console.log(email, password);
                 const data = JSON.parse(text);
-                setActiveUser(data.name);
+                ctx.setActiveUser(data.name);
+                ctx.setAccessEmail(data.email);
                 console.log('JSON:', data);
             } catch(err) {
                 setOpen(true);
-                setActiveUser(null);
+                ctx.setActiveUser(null);
                 console.log('err:', text);
             }
         });
-        console.log("hi")
     }
 
     const logoutUser = () => {
-        setActiveUser(null);
+        console.log(ctx);
+        ctx.setActiveUser(null);
         setEmail('');
         setPassword('');
     };
@@ -52,7 +53,7 @@ function Login(){
             <Card 
                 bgcolor="info"
                 header="Login"
-                body={!activeUser ? (
+                body={!ctx.activeUser ? (
                     <>
                     Email address<br/> 
                     <input type="email" className="form-control" id="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.currentTarget.value)}/><br/>
@@ -63,7 +64,7 @@ function Login(){
                     </>
                 ) : (
                     <>
-                    Welcome {activeUser}!<br/><br/>
+                    Welcome {ctx.activeUser}!<br/><br/>
                     <button type="submit" className="btn btn-light" onClick={logoutUser}>Logout</button>
                     </>
                 )

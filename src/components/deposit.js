@@ -9,29 +9,53 @@ function Deposit(){
     const [depositAmount, setDepositAmount] = useState(0)
     const [open, setOpen] = useState(false);
     const [depositApproval, setDepositApproval] = useState('');
+    const [balance, setBalance] = useState('');
+
     const ctx = useContext(UserContext);
     let activeUser = ctx.activeUser;
     
     useEffect(() => {
         if(activeUser === null){
           navigate('/login')
-        }
-      }, );
+        } else {             
+            fetch(`http://localhost:5000/account/find/${ctx.accessEmail}`)
+                .then(response => response.json())
+                .then(data => {
+                    console.log('data:', data);
+                    setBalance(data[0].balance)
+            });            
+        } 
+    });
     
-
 function makeDeposit(){
+
+//         // need to add transaction history to database
+//         // activeUser.transactionHistory.unshift({date: Date(), change: `+ $${depositAmount}`, balance: activeUser.balance});
+
     if(depositAmount > 0) {
-        activeUser.balance += depositAmount;
-        setDepositApproval(true);
-        activeUser.transactionHistory.unshift({date: Date(), change: `+ $${depositAmount}`, balance: activeUser.balance});
+        fetch(`http://localhost:5000/account/update/${ctx.accessEmail}/${depositAmount}`)
+        .then(response => response.text())
+        .then(text => {
+            try {
+                console.log(ctx.accessEmail, depositAmount)
+                const data = JSON.parse(text);
+                console.log(JSON.stringify(data.value));
+                setDepositApproval(true);
+                console.log('JSON:', data);
+            } catch(err) {
+                setOpen(true)
+                console.log('err:', text);
+            }
+            document.getElementById('deposit').value='';          
+        });
     } else {
         setDepositApproval(false)
-    };  
+        document.getElementById('deposit').value=''
+    }; 
     setOpen(true);
     setDepositAmount(0);
-    document.getElementById('deposit').value='';
-    // the last two lines make the balance update, by changing state, and reset the input field
-}
+
+  }
 
     return(
         <div className="container">
@@ -40,7 +64,7 @@ function makeDeposit(){
                 header="Deposit"
                 body={
                     <>
-                    Account Balance : $  {activeUser ? activeUser.balance : '--'}<br/><br/>  
+                    Account Balance : $  {activeUser ? balance : '--'}<br/><br/>  
                     Deposit Amount<br/> 
                     <input type="number" className="form-control" id="deposit" placeholder="Enter amount" onChange={e => setDepositAmount(Number(e.currentTarget.value))} /><br/>
                     <button type="submit" className="btn btn-light" onClick={makeDeposit} disabled={depositAmount ? false : true}>Deposit</button>

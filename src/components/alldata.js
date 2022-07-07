@@ -1,27 +1,24 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-// import UserContext from "./context";
+import UserContext from "./context";
 
 function AllData(){
-    // const navigate = useNavigate();
-    // const ctx = useContext(UserContext);
-    // let users = ctx.users;
-    // let activeUser = ctx.activeUser;
+    const navigate = useNavigate();
+    const ctx = useContext(UserContext);
     const [data, setData] = useState('');    
 
     useEffect(() => {
-    //     if(activeUser === null){
-    //       navigate('/login')
-    //     }
-    //   }, ); 
-
-       // fetch all accounts from API
-       fetch('http://localhost:5000/account/all')
-        .then(response => response.json())
-        .then(data => {
-            console.log('data:', data);
-            setData(data);    
-        });            
+        if(ctx.activeUser === null){
+          navigate('/login')
+        } else {
+           // fetch all accounts from API
+        fetch('http://localhost:5000/account/all')
+            .then(response => response.json())
+            .then(data => {
+                console.log('data:', data);
+                setData(data);    
+            }); 
+        }           
     }, []);
 
     return(
