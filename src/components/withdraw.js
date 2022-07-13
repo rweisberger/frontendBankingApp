@@ -38,9 +38,9 @@ function Withdraw(){
                 try {
                     console.log(ctx.accessEmail, withdrawAmount)
                     const data = JSON.parse(text);
-                    console.log(JSON.stringify(data.value));
+                    // console.log(JSON.stringify(data.value));
                     setWithdrawApproval(true);
-                    console.log('JSON:', data);
+                    // console.log('JSON:', data);
                 } catch(err) {
                     setOpen(true)
                     console.log('err:', text);
@@ -84,6 +84,3 @@ function Withdraw(){
 }
 
 export default Withdraw;
-// problems: trying to add balance without using the ternary operator, error "cannot get property balance of undefined" and everything breaks. Need to have something to display when no user is logged in and when a user is logged in. 
-
-// need to reset form so that the input is zero and the balance updates 

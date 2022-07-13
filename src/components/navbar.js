@@ -2,16 +2,11 @@ import React, { useContext } from "react";
 import { useNavigate } from 'react-router-dom';
 import UserContext from "./context";
 
-//useNavigate is routing the user back to the login page once they have logged out of their account through the Navbar button. 
-//useNavigate replaced useHistory- there are still many resources about useHistory even though it is out-of-date 
-
 function NavBar(){
     const ctx = useContext(UserContext);
     const navigate = useNavigate();
 
-
     function handleClick() {
-    //   console.log(navigate);
       navigate('/login');
       ctx.setActiveUser(null);
     }
@@ -30,6 +25,7 @@ function NavBar(){
                     <a className="nav-item nav-link px-3" href="#/withdraw" data-toggle="tooltip" data-placement="bottom" title="Make a withdraw">Withdraw</a>
                     <a className="nav-item nav-link px-3" href="#/accountActivity" data-toggle="tooltip" data-placement="bottom" title="View recent transactions">Account Activity</a>
                     <a className="nav-item nav-link px-3" href="#/allData" data-toggle="tooltip" data-placement="bottom" title="View data for all users">AllData</a>
+                    <a className="nav-item nav-link px-3" href="#/delete" data-toggle="tooltip" data-placement="bottom" title="Delete your account">Delete</a>
                     <button type="submit" className="btn btn-outline-info btn-sm" onClick={handleClick}>Logout</button>
                     </div>
                 ):(

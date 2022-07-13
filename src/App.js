@@ -14,18 +14,11 @@ import Deposit from "./components/deposit";
 import Withdraw from "./components/withdraw";
 import AllData from "./components/alldata";
 import Transactions from "./components/transactions";
+import DeleteAccount from "./components/delete";
 import './App.css';
 
-// Selga contributed the UserProvider function. This sets up the context with additional state features that are used in other components. 
-// function UserProvider({children}) {
-//   let [users, setUsers] = useState([{name:'Rachel', email:'rachel@gmail.com', password:'secret', balance:100}]);
-//   let [activeUser, setActiveUser] = useState(null);
-//   let context = {users, setUsers, activeUser, setActiveUser};
-//   // console.log(children);
-//   return <UserContext.Provider value={context}>{children}</UserContext.Provider>
-// }
+
 function App() {
-  // let [users, setUsers] = useState([{name:'Rachel', email:'rachel@gmail.com', password:'secret', balance:100, transactionHistory: []}]);
   let [activeUser, setActiveUser] = useState(null);
   let [accessEmail, setAccessEmail] = useState(null);
   let context = {activeUser, setActiveUser, accessEmail, setAccessEmail};
@@ -41,6 +34,7 @@ function App() {
           <Route path="/deposit/" element={<Deposit />}/>
           <Route path="/withdraw/" element={<Withdraw />}/>
           <Route path="/accountActivity/" element={<Transactions />} />
+          <Route path="/delete/" element={<DeleteAccount />} />
           <Route path="/AllData/" element={<AllData />} />
         </Routes>
         </UserContext.Provider>

@@ -15,7 +15,7 @@ function AllData(){
         fetch('http://localhost:5000/account/all')
             .then(response => response.json())
             .then(data => {
-                console.log('data:', data);
+                // console.log('data:', data);
                 setData(data);    
             }); 
         }           
@@ -24,7 +24,6 @@ function AllData(){
     return(
         <div className="container">
             <h1>All Data</h1>
-            {/* {data[0].name} */}
             <table className="table">
                 <thead>
                 <tr>

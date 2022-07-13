@@ -1,27 +1,40 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./context";
 
 function Transactions() {
     const navigate = useNavigate();
+    const [balance, setBalance] = useState('')
+    const [userActivityLog, setUserActivityLog] = useState('');
     const ctx = useContext(UserContext);
     let activeUser = ctx.activeUser;
-    let userActivityLog; 
+    // let userActivityLog; 
+    
 
-    if (activeUser) {userActivityLog = ctx.activeUser.transactionHistory};
+    // if (activeUser) {userActivityLog = activeUser.transactionHistory};
 
+    // add data call to get transaction history
     useEffect(() => {
         if(activeUser === null || userActivityLog === null){
           navigate('/login')
-        }
-      }, );
-    
+        } else {
+            // fetch all accounts from API
+         fetch(`http://localhost:5000/account/findOne/${ctx.accessEmail}`)
+             .then(response => response.json())
+             .then(data => {
+                 console.log('data:', data);
+                 setUserActivityLog(data.transactionHistory);
+                 setBalance(data.balance);
+             }); 
+         }           
+     }, []);
+
     return(
         <div className="container">
-            {activeUser ? (
+            {userActivityLog ? (
                 <>
                     <h1>Account Activity
-                        <small className="text-muted float-end">{`Available Balance: $${ctx.activeUser.balance}`}</small>
+                        <small className="text-muted float-end">{`Available Balance: $${balance}`}</small>
                     </h1>            
                     <table className="table">
                         <thead>
@@ -33,17 +46,17 @@ function Transactions() {
                         </thead>
                         <tbody>           
                         {userActivityLog.map((entry, index) => (
-                            <tr className={entry.change.includes('+') ? "table-success" : "table-danger"} key={index}>
+                            <tr className={entry.change.includes('-') ? "table-danger" : "table-success"} key={index}>
                             <td>{entry.date}</td>
-                            <td>{entry.change}</td>
-                            <td>{entry.balance}</td>
+                            <td>${entry.change}</td>
+                            <td>${entry.balance}</td>
                         </tr>
                         ))}
                         </tbody>
                     </table>
                 </>) 
                 :
-                (<h1>Login to view Account Activity </h1>)
+                (<h1>Not available </h1>)
             }
         </div>
     );

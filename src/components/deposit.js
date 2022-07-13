@@ -21,7 +21,7 @@ function Deposit(){
             fetch(`http://localhost:5000/account/find/${ctx.accessEmail}`)
                 .then(response => response.json())
                 .then(data => {
-                    console.log('data:', data);
+                    // console.log('data:', data);
                     setBalance(data[0].balance)
             });            
         } 
@@ -39,9 +39,9 @@ function makeDeposit(){
             try {
                 console.log(ctx.accessEmail, depositAmount)
                 const data = JSON.parse(text);
-                console.log(JSON.stringify(data.value));
+                // console.log(JSON.stringify(data.value));
                 setDepositApproval(true);
-                console.log('JSON:', data);
+                // console.log('JSON:', data);
             } catch(err) {
                 setOpen(true)
                 console.log('err:', text);
@@ -81,5 +81,3 @@ function makeDeposit(){
 }
 
 export default Deposit;
-
-//input is a string, even though the state is initialized to the number 0. It was not obvious with the withdraw because 100 - "90" is 10, but in the deposit 100 + "90" is 10090. Thats is why I am adding Number() to the onChange.
