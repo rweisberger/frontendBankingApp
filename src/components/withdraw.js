@@ -14,7 +14,6 @@ function Withdraw(){
     const [balance, setBalance] = useState('');
 
     let activeUser = ctx.activeUser;
-    let failureMessage;
 
     useEffect(() => {
         if(activeUser === null){
@@ -32,12 +31,14 @@ function Withdraw(){
     // onclick update balance in user context
     function makeWithdraw(){
         if(0 < withdrawAmount && withdrawAmount <= balance) {
-            fetch(`http://localhost:5000/account/update/${ctx.accessEmail}/${-withdrawAmount}`)
+            let newBalance = balance - withdrawAmount;
+
+            fetch(`http://localhost:5000/account/update/${ctx.accessEmail}/${-withdrawAmount}/${newBalance}`)
             .then(response => response.text())
             .then(text => {
                 try {
-                    console.log(ctx.accessEmail, withdrawAmount)
-                    const data = JSON.parse(text);
+                    console.log(ctx.accessEmail, withdrawAmount,newBalance)
+                    // const data = JSON.parse(text);
                     // console.log(JSON.stringify(data.value));
                     setWithdrawApproval(true);
                     // console.log('JSON:', data);
@@ -56,8 +57,6 @@ function Withdraw(){
         }
         setOpen(true);
         document.getElementById('withdraw').value='';
-
-        return failureMessage
     }
 
     return(

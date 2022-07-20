@@ -8,12 +8,7 @@ function Transactions() {
     const [userActivityLog, setUserActivityLog] = useState('');
     const ctx = useContext(UserContext);
     let activeUser = ctx.activeUser;
-    // let userActivityLog; 
     
-
-    // if (activeUser) {userActivityLog = activeUser.transactionHistory};
-
-    // add data call to get transaction history
     useEffect(() => {
         if(activeUser === null || userActivityLog === null){
           navigate('/login')
@@ -40,16 +35,16 @@ function Transactions() {
                         <thead>
                         <tr>
                             <th scope="col">Date</th>
-                            <th scope="col">Withdraw/Deposit Amount</th>
-                            <th scope="col">Balance</th>
+                            <th scope="col">Withdraw/Deposit Amount($)</th>
+                            <th scope="col">Balance($)</th>
                         </tr>
                         </thead>
                         <tbody>           
-                        {userActivityLog.map((entry, index) => (
+                        {userActivityLog.slice(0).reverse().map((entry, index) => (
                             <tr className={entry.change.includes('-') ? "table-danger" : "table-success"} key={index}>
                             <td>{entry.date}</td>
-                            <td>${entry.change}</td>
-                            <td>${entry.balance}</td>
+                            <td >{entry.change}</td>
+                            <td>{entry.balance}</td>
                         </tr>
                         ))}
                         </tbody>

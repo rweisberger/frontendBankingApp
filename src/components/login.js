@@ -6,7 +6,6 @@ import AlertComponent from "./alert";
 function Login(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    // const [activeUser, setActiveUser] = useState('');
     const [open, setOpen] = useState(false);
     const ctx = useContext(UserContext);
 
@@ -21,6 +20,7 @@ function Login(){
                 const data = JSON.parse(text);
                 ctx.setActiveUser(data.name);
                 ctx.setAccessEmail(data.email);
+                ctx.setUserAdminStatus(data.isAdmin);
                 console.log('JSON:', data);
             } catch(err) {
                 setOpen(true);

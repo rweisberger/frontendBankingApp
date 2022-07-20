@@ -21,7 +21,8 @@ import './App.css';
 function App() {
   let [activeUser, setActiveUser] = useState(null);
   let [accessEmail, setAccessEmail] = useState(null);
-  let context = {activeUser, setActiveUser, accessEmail, setAccessEmail};
+  let [userAdminStatus, setUserAdminStatus] = useState(null);
+  let context = {activeUser, setActiveUser, accessEmail, setAccessEmail, userAdminStatus,setUserAdminStatus};
 
   return (
     <HashRouter>

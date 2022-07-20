@@ -28,17 +28,14 @@ function Deposit(){
     });
     
 function makeDeposit(){
-
-//         // need to add transaction history to database
-//         // activeUser.transactionHistory.unshift({date: Date(), change: `+ $${depositAmount}`, balance: activeUser.balance});
-
     if(depositAmount > 0) {
-        fetch(`http://localhost:5000/account/update/${ctx.accessEmail}/${depositAmount}`)
+        let newBalance = balance + depositAmount;
+        fetch(`http://localhost:5000/account/update/${ctx.accessEmail}/${depositAmount}/${newBalance}`)
         .then(response => response.text())
         .then(text => {
             try {
-                console.log(ctx.accessEmail, depositAmount)
-                const data = JSON.parse(text);
+                console.log(ctx.accessEmail, depositAmount,newBalance)
+                // const data = JSON.parse(text);
                 // console.log(JSON.stringify(data.value));
                 setDepositApproval(true);
                 // console.log('JSON:', data);
@@ -54,7 +51,6 @@ function makeDeposit(){
     }; 
     setOpen(true);
     setDepositAmount(0);
-
   }
 
     return(
@@ -66,7 +62,7 @@ function makeDeposit(){
                     <>
                     Account Balance : $  {activeUser ? balance : '--'}<br/><br/>  
                     Deposit Amount<br/> 
-                    <input type="number" className="form-control" id="deposit" placeholder="Enter amount" onChange={e => setDepositAmount(Number(e.currentTarget.value))} /><br/>
+                    <input type="number" className="form-control" id="deposit" placeholder="Enter amount" onChange={e => setDepositAmount(Number(e.currentTarget.value),balance)} /><br/>
                     <button type="submit" className="btn btn-light" onClick={makeDeposit} disabled={depositAmount ? false : true}>Deposit</button>
                     {depositApproval ? 
                         <AlertComponent open={open} message="The deposit was successfully received." type="success" onClose={()=> setOpen(false)} />

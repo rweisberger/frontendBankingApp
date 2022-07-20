@@ -23,13 +23,14 @@ function AllData(){
 
     return(
         <div className="container">
-            <h1>All Data</h1>
+            <h1 className="display-5 text-center">All Data</h1>
             <table className="table">
                 <thead>
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Password</th>
+                    <th scope="col" className="text-center">Administrator</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,6 +39,11 @@ function AllData(){
                     <td>{user.name}</td>
                     <td>{user.email}</td>
                     <td>{user.password}</td>
+                    {user.isAdmin ? (
+                        <td className="text-center"><b> + </b></td>
+                        ) : (
+                        <td className="text-center"> - </td>
+                    )}
                 </tr>
                 ))
                 ) : (
