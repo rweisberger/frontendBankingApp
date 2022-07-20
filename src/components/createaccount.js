@@ -57,7 +57,7 @@ function CreateAccount(){
 
             var res  = await fetch(url, requestOptions);
             var data = await res.json();    
-            console.log(data);        
+            // console.log(data);        
         })();
         setShowCreateAccount(false);
     }

@@ -26,7 +26,7 @@ function DeleteAccount(){
                 try {
                     console.log(email, password);
                     // const data = JSON.parse(text);
-                    console.log('data:', data);
+                    // console.log('data:', data);
                     ctx.setActiveUser(null);
                     navigate('/CreateAccount');
                 } catch(err) {

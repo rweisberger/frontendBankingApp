@@ -22,7 +22,7 @@ function Transactions() {
                  setBalance(data.balance);
              }); 
          }           
-     }, []);
+     });
 
     return(
         <div className="container">

@@ -16,12 +16,12 @@ function Login(){
         .then(response => response.text())
         .then(text => {
             try {
-                console.log(email, password);
+                // console.log(email, password);
                 const data = JSON.parse(text);
                 ctx.setActiveUser(data.name);
                 ctx.setAccessEmail(data.email);
                 ctx.setUserAdminStatus(data.isAdmin);
-                console.log('JSON:', data);
+                // console.log('JSON:', data);
             } catch(err) {
                 setOpen(true);
                 ctx.setActiveUser(null);
@@ -31,7 +31,7 @@ function Login(){
     }
 
     const logoutUser = () => {
-        console.log(ctx);
+        // console.log(ctx);
         ctx.setActiveUser(null);
         setEmail('');
         setPassword('');
