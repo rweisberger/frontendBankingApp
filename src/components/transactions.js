@@ -28,8 +28,8 @@ function Transactions() {
         <div className="container">
             {userActivityLog ? (
                 <>
-                    <h1>Account Activity
-                        <small className="text-muted float-end">{`Available Balance: $${balance}`}</small>
+                    <h1 className="display-5">Account Activity
+                        <small className="display-5 text-muted float-end">{`Available Balance: $${balance}`}</small>
                     </h1>            
                     <table className="table">
                         <thead>
