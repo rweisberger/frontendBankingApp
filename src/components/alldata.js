@@ -8,7 +8,7 @@ function AllData(){
     const [data, setData] = useState('');    
 
     useEffect(() => {
-        if(ctx.activeUser === null){
+        if(ctx.activeUser === null || ctx.userAdminStatus === false){
           navigate('/login')
         } else {
            // fetch all accounts from API
