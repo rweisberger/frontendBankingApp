@@ -14,7 +14,7 @@ function Transactions() {
           navigate('/login')
         } else {
             // fetch all accounts from API
-         fetch(`http://localhost:5000/account/findOne/${ctx.accessEmail}`)
+         fetch(`/account/findOne/${ctx.accessEmail}`)
              .then(response => response.json())
              .then(data => {
                  console.log('data:', data);
@@ -22,7 +22,7 @@ function Transactions() {
                  setBalance(data.balance);
              }); 
          }           
-     });
+     },[]);
 
     return(
         <div className="container">

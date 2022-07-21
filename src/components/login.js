@@ -12,7 +12,7 @@ function Login(){
   
 
     function findUser(){
-        fetch(`http://localhost:5000/account/login/${email}/${password}`)
+        fetch(`/account/login/${email}/${password}`)
         .then(response => response.text())
         .then(text => {
             try {

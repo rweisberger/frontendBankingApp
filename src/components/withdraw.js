@@ -19,7 +19,7 @@ function Withdraw(){
         if(activeUser === null){
             navigate('/login')
         } else {             
-            fetch(`http://localhost:5000/account/find/${ctx.accessEmail}`)
+            fetch(`/account/find/${ctx.accessEmail}`)
                 .then(response => response.json())
                 .then(data => {
                     // console.log('data:', data);
@@ -33,7 +33,7 @@ function Withdraw(){
         if(0 < withdrawAmount && withdrawAmount <= balance) {
             let newBalance = balance - withdrawAmount;
 
-            fetch(`http://localhost:5000/account/update/${ctx.accessEmail}/${-withdrawAmount}/${newBalance}`)
+            fetch(`/account/update/${ctx.accessEmail}/${-withdrawAmount}/${newBalance}`)
             .then(response => response.text())
             .then(text => {
                 try {

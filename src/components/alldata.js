@@ -12,7 +12,7 @@ function AllData(){
           navigate('/login')
         } else {
            // fetch all accounts from API
-        fetch('http://localhost:5000/account/all')
+        fetch('/account/all')
             .then(response => response.json())
             .then(data => {
                 // console.log('data:', data);

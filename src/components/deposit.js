@@ -18,7 +18,7 @@ function Deposit(){
         if(activeUser === null){
           navigate('/login')
         } else {             
-            fetch(`http://localhost:5000/account/find/${ctx.accessEmail}`)
+            fetch(`/account/find/${ctx.accessEmail}`)
                 .then(response => response.json())
                 .then(data => {
                     // console.log('data:', data);
@@ -30,7 +30,7 @@ function Deposit(){
 function makeDeposit(){
     if(depositAmount > 0) {
         let newBalance = balance + depositAmount;
-        fetch(`http://localhost:5000/account/update/${ctx.accessEmail}/${depositAmount}/${newBalance}`)
+        fetch(`/account/update/${ctx.accessEmail}/${depositAmount}/${newBalance}`)
         .then(response => response.text())
         .then(text => {
             try {

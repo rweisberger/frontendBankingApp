@@ -20,7 +20,7 @@ function DeleteAccount(){
    
     function deleteUser(){    
         if(confirm){  
-            fetch(`http://localhost:5000/account/delete/${email}/${password}`, { method: 'DELETE' })
+            fetch(`/account/delete/${email}/${password}`, { method: 'DELETE' })
             .then(response => response.text())
             .then(data => {
                 try {

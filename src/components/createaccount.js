@@ -47,7 +47,7 @@ function CreateAccount(){
         if(!validate(email, 'email')) return;
         if(!validate(password, 'password')) return;
         
-        const url = `http://localhost:5000/account/create`;
+        const url = '/account/create';
         (async () => {
             const requestOptions = {
                 method: 'POST',
