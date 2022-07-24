@@ -34,7 +34,7 @@ function makeDeposit(){
         .then(response => response.text())
         .then(text => {
             try {
-                console.log(ctx.accessEmail, depositAmount,newBalance)
+                // console.log(ctx.accessEmail, depositAmount,newBalance)
                 // const data = JSON.parse(text);
                 // console.log(JSON.stringify(data.value));
                 setDepositApproval(true);
@@ -43,14 +43,12 @@ function makeDeposit(){
                 setOpen(true)
                 console.log('err:', text);
             }
-            document.getElementById('deposit').value='';          
         });
     } else {
         setDepositApproval(false)
-        document.getElementById('deposit').value=''
     }; 
     setOpen(true);
-    setDepositAmount(0);
+    setDepositAmount('');
   }
 
     return(
@@ -62,7 +60,7 @@ function makeDeposit(){
                     <>
                     Account Balance : $  {activeUser ? balance : '--'}<br/><br/>  
                     Deposit Amount<br/> 
-                    <input type="number" className="form-control" id="deposit" placeholder="Enter amount" onChange={e => setDepositAmount(Number(e.currentTarget.value),balance)} /><br/>
+                    <input type="number" className="form-control" value={depositAmount} placeholder="Enter amount" onChange={e => setDepositAmount(Number(e.currentTarget.value),balance)} /><br/>
                     <button type="submit" className="btn btn-light" onClick={makeDeposit} disabled={depositAmount ? false : true}>Deposit</button>
                     {depositApproval ? 
                         <AlertComponent open={open} message="The deposit was successfully received." type="success" onClose={()=> setOpen(false)} />

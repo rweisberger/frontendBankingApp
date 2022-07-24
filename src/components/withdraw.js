@@ -37,7 +37,7 @@ function Withdraw(){
             .then(response => response.text())
             .then(text => {
                 try {
-                    console.log(ctx.accessEmail, withdrawAmount,newBalance)
+                    // console.log(ctx.accessEmail, withdrawAmount,newBalance)
                     // const data = JSON.parse(text);
                     // console.log(JSON.stringify(data.value));
                     setWithdrawApproval(true);
@@ -46,7 +46,7 @@ function Withdraw(){
                     setOpen(true)
                     console.log('err:', text);
                 }
-                document.getElementById('withdraw').value='';          
+                // document.getElementById('withdraw').value='';          
             });
         } else if(0 > withdrawAmount) {
             setErrorMessage('Enter a positive number.');
@@ -56,7 +56,7 @@ function Withdraw(){
             setWithdrawApproval(false);
         }
         setOpen(true);
-        document.getElementById('withdraw').value='';
+        setWithdrawAmount('');
     }
 
     return(
@@ -68,7 +68,7 @@ function Withdraw(){
                 <>
                 Account Balance : $ {activeUser ? balance : '--'}<br/><br/>  
                 Withdraw Amount<br/> 
-                <input type="number" className="form-control" id="withdraw" placeholder="Enter amount" onChange={e => setWithdrawAmount(Number(e.currentTarget.value))}/><br/>
+                <input type="number" className="form-control" value={withdrawAmount} placeholder="Enter amount" onChange={e => setWithdrawAmount(Number(e.currentTarget.value))}/><br/>
                 <button type="submit" className="btn btn-light" onClick={makeWithdraw} disabled={withdrawAmount ? false : true}>Withdraw</button>
                 {withdrawApproval ? 
                     <AlertComponent open={open} message="The withdraw was processed." type="success" onClose={()=> setOpen(false)} />
