@@ -19,24 +19,27 @@ function DeleteAccount(){
     }, []);
    
     function deleteUser(){    
-        if(confirm){  
+        if(confirm && 
+           email === ctx.activeUser && 
+           password){  
             fetch(`/account/delete/${email}/${password}`, { method: 'DELETE' })
             .then(response => response.text())
             .then(data => {
                 try {
-                    console.log(email, password);
+                    // console.log(email, password);
                     // const data = JSON.parse(text);
                     // console.log('data:', data);
                     ctx.setActiveUser(null);
                     navigate('/CreateAccount');
                 } catch(err) {
                     setOpen(true);
-                    ctx.setActiveUser(null);
                     console.log('err:', data);
                 }
             });
         } else {
             console.log("account not deleted. Confirm =", confirm)
+            setOpen(true);
+
         }
     }
 
@@ -58,8 +61,8 @@ function DeleteAccount(){
                             I understand that my account will be permanently deleted.
                         </label>
                     </div>
-                        <AlertComponent open={open} message="User not found" type= "error" onClose={()=> setOpen(!confirm)} />
-                    </>
+                        <AlertComponent open={open} message="Complete all fields for the current user." type= "error" onClose={()=> setOpen(!confirm)} />
+                    </> 
                 } 
             />
         </div>
