@@ -20,7 +20,7 @@ function DeleteAccount(){
    
     function deleteUser(){    
         if(confirm && 
-           email === ctx.activeUser && 
+           email === ctx.accessEmail && 
            password){  
             fetch(`/account/delete/${email}/${password}`, { method: 'DELETE' })
             .then(response => response.text())
