@@ -1,5 +1,4 @@
-import { useState, useContext } from "react";
-import UserContext from "./context";
+import { useState } from "react";
 import AlertComponent from "./alert";
 import Card from "./card";
 
@@ -11,7 +10,6 @@ function CreateAccount(){
     const [isAdmin, setIsAdmin]                     = useState(false);
     const [open, setOpen]                           = useState(false);
     const [message, setMessage]                     = useState('')    
-    const ctx                                       = useContext(UserContext);
 
     function validate(field, label){
         if(!field){
@@ -47,16 +45,19 @@ function CreateAccount(){
         if(!validate(email, 'email')) return;
         if(!validate(password, 'password')) return;
         
+        const accountNumber = Math.floor(Math.random() * 1000000000000);
+
         const url = '/account/create';
         (async () => {
             const requestOptions = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({name, email, password, isAdmin})
+                body: JSON.stringify({accountNumber, name, email, password, isAdmin})
             };
+            await fetch(url, requestOptions);
 
-            var res  = await fetch(url, requestOptions);
-            var data = await res.json();    
+            // var res  = await fetch(url, requestOptions);
+            // var data = await res.json();    
             // console.log(data);        
         })();
         setShowCreateAccount(false);
@@ -69,7 +70,7 @@ function CreateAccount(){
         setPassword('');
         setShowCreateAccount(true);
     }
-console.log(isAdmin)
+
     return(
         <div className="container">
             <Card

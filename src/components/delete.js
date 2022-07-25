@@ -39,7 +39,7 @@ function DeleteAccount(){
             console.log("account not deleted. Confirm =", confirm)
         }
     }
-    console.log(confirm)
+
     return(
         <div className="container">
             <Card 

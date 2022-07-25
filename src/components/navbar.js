@@ -15,7 +15,7 @@ function NavBar(){
         <div>
             {ctx.activeUser ? (
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a className="navbar-brand px-3" href="#/" data-toggle="tooltip" data-placement="bottom" title="Visit our homepage">BadBank Welcomes {ctx.activeUser}!</a>
+                <a className="navbar-brand px-3" href="#/" data-toggle="tooltip" data-placement="bottom" title="Visit our homepage">The Bank Welcomes {ctx.activeUser}!</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -35,7 +35,7 @@ function NavBar(){
                 </nav>
             ):(
                 <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a className="navbar-brand px-3" href="#/" data-toggle="tooltip" data-placement="bottom" title="Visit our homepage">BadBank</a>
+                <a className="navbar-brand px-3" href="#/" data-toggle="tooltip" data-placement="bottom" title="Visit our homepage">The Bank</a>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

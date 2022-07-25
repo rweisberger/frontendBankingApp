@@ -29,8 +29,8 @@ function Transactions() {
             {userActivityLog ? (
                 <>
                     <h1 className="display-5">Account Activity
-                        <small className="display-5 text-muted float-end">{`Available Balance: $${balance}`}</small>
-                    </h1>            
+                    </h1>                         
+                    <h5 className="display text-muted">{`Available Balance: $${balance}`}</h5>
                     <table className="table">
                         <thead>
                         <tr>
