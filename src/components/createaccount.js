@@ -35,8 +35,6 @@ function CreateAccount(){
                 return false;
             }
         }
-        setMessage('Account created successfully!');
-        setOpen(true);
         return true;
     }
 
@@ -47,20 +45,47 @@ function CreateAccount(){
         
         const accountNumber = Math.floor(Math.random() * 1000000000000);
 
-        const url = '/account/create';
-        (async () => {
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                body: JSON.stringify({accountNumber, name, email, password, isAdmin})
-            };
-            await fetch(url, requestOptions);
+        // const url = '/account/create';
+        // (async () => {
+        //     const requestOptions = {
+        //         method: 'POST',
+        //         headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        //         body: JSON.stringify({accountNumber, name, email, password, isAdmin})
+        //     };
+        //     await fetch(url, requestOptions);
 
-            // var res  = await fetch(url, requestOptions);
-            // var data = await res.json();    
-            // console.log(data);        
-        })();
-        setShowCreateAccount(false);
+        //     // var res  = await fetch(url, requestOptions);
+        //     // var data = await res.json();    
+        //     // console.log(data);        
+        // })();
+        // setShowCreateAccount(false);
+    
+        const url = '/account/create';
+        const requestOptions = {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify({accountNumber, name, email, password, isAdmin})
+                };
+        // function createUser(){
+            fetch(url, requestOptions)
+            .then(response => response.text())
+            .then(text => {
+                try {
+                    // console.log(email, password);
+                    const data = JSON.parse(text);
+                    console.log('this is the data', data);                
+                    // setShowCreateAccount(false);
+                    setMessage('Account created successfully!');
+                    setOpen(true);
+                    setShowCreateAccount(false);
+                } catch(err) {
+                    setMessage(text)
+                    setOpen(true);
+                    console.log('err:', text);
+                }                    
+
+            });
+            
     }
 
     function clearForm(){

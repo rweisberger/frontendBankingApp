@@ -34,11 +34,7 @@ function makeDeposit(){
         .then(response => response.text())
         .then(text => {
             try {
-                // console.log(ctx.accessEmail, depositAmount,newBalance)
-                // const data = JSON.parse(text);
-                // console.log(JSON.stringify(data.value));
                 setDepositApproval(true);
-                // console.log('JSON:', data);
             } catch(err) {
                 setOpen(true)
                 console.log('err:', text);
