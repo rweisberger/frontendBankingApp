@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import UserContext from "./context";
+import UserContext from "../context/UserContext";
 
 function UserAccountsData(){
     const navigate = useNavigate();

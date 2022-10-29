@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
-import UserContext from "./context";
-import Card from "./card";
-import AlertComponent from "./alert";
+import UserContext from "../context/UserContext";
+import Card from "../shared/Card";
+import AlertComponent from "../shared/Alert";
 
 function Login(){
     const [email, setEmail] = useState('');

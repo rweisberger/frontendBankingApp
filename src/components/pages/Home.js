@@ -1,6 +1,6 @@
 import React from "react";
-import Card from "./card";
-import bank from "./bank.png"
+import Card from "../shared/Card";
+import bank from "../assets/images/bank.png"
 
 function Home(){
 

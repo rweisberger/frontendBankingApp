@@ -1,8 +1,8 @@
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import UserContext from "./context";
-import Card from "./card";
-import AlertComponent from "./alert";
+import UserContext from "../context/UserContext";
+import Card from "../shared/Card";
+import AlertComponent from "../shared/Alert";
 
 function DeleteAccount(){
     const navigate = useNavigate();

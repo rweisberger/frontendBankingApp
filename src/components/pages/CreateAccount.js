@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AlertComponent from "./alert";
-import Card from "./card";
+import AlertComponent from "../shared/Alert";
+import Card from "../shared/Card";
 
 function CreateAccount(){
     const [showCreateAccount, setShowCreateAccount] = useState(true);

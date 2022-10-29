@@ -5,16 +5,16 @@ import {
   Routes, 
   Route
 } from "react-router-dom";
-import UserContext from "./components/context";
-import NavBar from "./components/navbar";
-import Home from "./components/home";
-import CreateAccount from "./components/createaccount";
-import Login from "./components/login";
-import Deposit from "./components/deposit";
-import Withdraw from "./components/withdraw";
-import UserAccountsData from "./components/userAccountsData";
-import Transactions from "./components/transactions";
-import DeleteAccount from "./components/delete";
+import UserContext from "./components/context/UserContext";
+import NavBar from "./components/navigation/Navbar";
+import Home from "./components/pages/Home";
+import CreateAccount from "./components/pages/CreateAccount";
+import Login from "./components/pages/Login";
+import Deposit from "./components/pages/Deposit";
+import Withdraw from "./components/pages/Withdraw";
+import UserAccountsData from "./components/pages/UserAccountsData";
+import Transactions from "./components/pages/Transactions";
+import DeleteAccount from "./components/pages/DeleteAccount";
 import './App.css';
 
 
