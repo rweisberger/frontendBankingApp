@@ -2,13 +2,13 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UserContext from "./context";
 
-function AllData(){
+function UserAccountsData(){
     const navigate = useNavigate();
-    const ctx = useContext(UserContext);
+    const {activeUser, userAdminStatus} = useContext(UserContext);
     const [data, setData] = useState('');    
 
     useEffect(() => {
-        if(ctx.activeUser === null || ctx.userAdminStatus === false){
+        if(activeUser === null || userAdminStatus === false){
           navigate('/login')
         } else {
            // fetch all accounts from API
@@ -57,4 +57,4 @@ function AllData(){
     );
 }
 
-export default AllData;
+export default UserAccountsData;

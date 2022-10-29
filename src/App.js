@@ -12,7 +12,7 @@ import CreateAccount from "./components/createaccount";
 import Login from "./components/login";
 import Deposit from "./components/deposit";
 import Withdraw from "./components/withdraw";
-import AllData from "./components/alldata";
+import UserAccountsData from "./components/userAccountsData";
 import Transactions from "./components/transactions";
 import DeleteAccount from "./components/delete";
 import './App.css';
@@ -36,7 +36,7 @@ function App() {
           <Route path="/withdraw/" element={<Withdraw />}/>
           <Route path="/accountActivity/" element={<Transactions />} />
           <Route path="/delete/" element={<DeleteAccount />} />
-          <Route path="/AllData/" element={<AllData />} />
+          <Route path="/UserAccountsData/" element={<UserAccountsData />} />
         </Routes>
         </UserContext.Provider>
     </HashRouter>

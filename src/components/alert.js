@@ -1,19 +1,19 @@
 import React from "react";
 import { Snackbar, Alert } from "@mui/material";
 
-function AlertComponent(props){
+function AlertComponent({open, onClose, message, type}){
     return(
         <Snackbar  
             anchorOrigin={{
                 horizontal: "right",
                 vertical: "bottom",
                 }}
-            open={props.open} 
+            open={open} 
             autoHideDuration={6000} 
-            onClose={props.onClose}
+            onClose={onClose}
         >
-            <Alert onClose={props.onClose} severity={props.type} variant="filled">
-                <b>{props.message}</b>
+            <Alert onClose={onClose} severity={type} variant="filled">
+                <b>{message}</b>
             </Alert>
         </Snackbar>
     )

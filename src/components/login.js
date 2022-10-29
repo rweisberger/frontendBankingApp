@@ -7,24 +7,22 @@ function Login(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [open, setOpen] = useState(false);
-    const ctx = useContext(UserContext);
-
-  
+    const {activeUser, setActiveUser, setAccessEmail, setUserAdminStatus} = useContext(UserContext);
 
     function findUser(){
         fetch(`/account/login/${email}/${password}`)
         .then(response => response.text())
         .then(text => {
             try {
-                // console.log(email, password);
+                console.log(email, password);
                 const data = JSON.parse(text);
-                ctx.setActiveUser(data.name);
-                ctx.setAccessEmail(data.email);
-                ctx.setUserAdminStatus(data.isAdmin);
-                // console.log('JSON:', data);
+                setActiveUser(data.name);
+                setAccessEmail(data.email);
+                setUserAdminStatus(data.isAdmin);
+                console.log('JSON:', data);
             } catch(err) {
                 setOpen(true);
-                ctx.setActiveUser(null);
+                setActiveUser(null);
                 console.log('err:', text);
             }
         });
@@ -32,7 +30,7 @@ function Login(){
 
     const logoutUser = () => {
         // console.log(ctx);
-        ctx.setActiveUser(null);
+        setActiveUser(null);
         setEmail('');
         setPassword('');
     };
@@ -42,7 +40,7 @@ function Login(){
             <Card 
                 bgcolor="info"
                 header="Login"
-                body={!ctx.activeUser ? (
+                body={!activeUser ? (
                     <>
                     Email address<br/> 
                     <input type="email" className="form-control" id="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.currentTarget.value)}/><br/>
@@ -53,7 +51,7 @@ function Login(){
                     </>
                 ) : (
                     <>
-                    Welcome {ctx.activeUser}!<br/><br/>
+                    Welcome {activeUser}!<br/><br/>
                     <button type="submit" className="btn btn-light" onClick={logoutUser}>Logout</button>
                     </>
                 )

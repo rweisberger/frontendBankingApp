@@ -10,17 +10,17 @@ function DeleteAccount(){
     const [password, setPassword] = useState('');
     const [confirm, setConfirm] = useState(false);
     const [open, setOpen] = useState(false);
-    const ctx = useContext(UserContext);
+    const {activeUser, setActiveUser, accessEmail} = useContext(UserContext);
 
     useEffect(() => {
-        if(ctx.activeUser === null){
+        if(activeUser === null){
           navigate('/login');
         }
     }, []);
    
     function deleteUser(){    
         if(confirm && 
-           email === ctx.accessEmail && 
+           email === accessEmail && 
            password){  
             fetch(`/account/delete/${email}/${password}`, { method: 'DELETE' })
             .then(response => response.text())
@@ -29,7 +29,7 @@ function DeleteAccount(){
                     // console.log(email, password);
                     // const data = JSON.parse(text);
                     // console.log('data:', data);
-                    ctx.setActiveUser(null);
+                    setActiveUser(null);
                     navigate('/CreateAccount');
                 } catch(err) {
                     setOpen(true);

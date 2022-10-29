@@ -11,14 +11,14 @@ function Deposit(){
     const [depositApproval, setDepositApproval] = useState('');
     const [balance, setBalance] = useState('');
 
-    const ctx = useContext(UserContext);
-    let activeUser = ctx.activeUser;
+    const {activeUser, accessEmail} = useContext(UserContext);
+    // let activeUser = ctx.activeUser;
     
     useEffect(() => {
         if(activeUser === null){
           navigate('/login')
         } else {             
-            fetch(`/account/find/${ctx.accessEmail}`)
+            fetch(`/account/find/${accessEmail}`)
                 .then(response => response.json())
                 .then(data => {
                     // console.log('data:', data);
@@ -30,7 +30,7 @@ function Deposit(){
 function makeDeposit(){
     if(depositAmount > 0) {
         let newBalance = balance + depositAmount;
-        fetch(`/account/update/${ctx.accessEmail}/${depositAmount}/${newBalance}`)
+        fetch(`/account/update/${accessEmail}/${depositAmount}/${newBalance}`)
         .then(response => response.text())
         .then(text => {
             try {

@@ -6,15 +6,15 @@ function Transactions() {
     const navigate = useNavigate();
     const [balance, setBalance] = useState('')
     const [userActivityLog, setUserActivityLog] = useState('');
-    const ctx = useContext(UserContext);
-    let activeUser = ctx.activeUser;
+    const {activeUser, accessEmail} = useContext(UserContext);
+    // let activeUser = ctx.activeUser;
     
     useEffect(() => {
         if(activeUser === null || userActivityLog === null){
           navigate('/login')
         } else {
             // fetch all accounts from API
-         fetch(`/account/findOne/${ctx.accessEmail}`)
+         fetch(`/account/findOne/${accessEmail}`)
              .then(response => response.json())
              .then(data => {
                 //  console.log('data:', data);

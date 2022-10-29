@@ -25,7 +25,7 @@ function NavBar(){
                     <a className="nav-item nav-link px-3" href="#/withdraw" data-toggle="tooltip" data-placement="bottom" title="Make a withdraw">Withdraw</a>
                     <a className="nav-item nav-link px-3" href="#/accountActivity" data-toggle="tooltip" data-placement="bottom" title="View recent transactions">Account Activity</a>
                     {ctx.userAdminStatus ? (
-                        <a className="nav-item nav-link px-3" href="#/allData" data-toggle="tooltip" data-placement="bottom" title="View data for all users">AllData</a>
+                        <a className="nav-item nav-link px-3" href="#/userAccountsData" data-toggle="tooltip" data-placement="bottom" title="View data for all users">UserAccountsData</a>
                         ) : (
                         <></>)}
                     <a className="nav-item nav-link px-3" href="#/delete" data-toggle="tooltip" data-placement="bottom" title="Delete your account">Delete</a>
