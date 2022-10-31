@@ -7,7 +7,8 @@ function Transactions() {
     const [balance, setBalance] = useState('')
     const [userActivityLog, setUserActivityLog] = useState('');
     const {activeUser, accessEmail} = useContext(UserContext);
-    // let activeUser = ctx.activeUser;
+
+    const tableColumns = ['Date', 'Withdraw/Deposit Amount($)', 'Balance($)'];
     
     useEffect(() => {
         if(activeUser === null || userActivityLog === null){
@@ -34,9 +35,10 @@ function Transactions() {
                     <table className="table">
                         <thead>
                         <tr>
-                            <th scope="col">Date</th>
+                            {tableColumns.map((name, index) => <th scope="col" key={index}>{name}</th>)}
+                            {/* <th scope="col">Date</th>
                             <th scope="col">Withdraw/Deposit Amount($)</th>
-                            <th scope="col">Balance($)</th>
+                            <th scope="col">Balance($)</th> */}
                         </tr>
                         </thead>
                         <tbody>           
@@ -51,7 +53,7 @@ function Transactions() {
                     </table>
                 </>) 
                 :
-                (<h1>Not available </h1>)
+                (<h1>Not available</h1>)
             }
         </div>
     );

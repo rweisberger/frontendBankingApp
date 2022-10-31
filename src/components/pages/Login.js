@@ -14,12 +14,12 @@ function Login(){
         .then(response => response.text())
         .then(text => {
             try {
-                console.log(email, password);
+                // console.log(email, password);
                 const data = JSON.parse(text);
                 setActiveUser(data.name);
                 setAccessEmail(data.email);
                 setUserAdminStatus(data.isAdmin);
-                console.log('JSON:', data);
+                // console.log('JSON:', data);
             } catch(err) {
                 setOpen(true);
                 setActiveUser(null);
